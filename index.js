@@ -1,4 +1,6 @@
 const uploadBtn = document.getElementById("upload-btn");
+const mainContainer = document.getElementById("myData");
+
 uploadBtn.addEventListener("click", () => {
   upload();
 });
@@ -39,9 +41,15 @@ function excelFileToJSON(file) {
           result[sheetName] = roa;
         }
       });
-      let resultEle = document.getElementById("json-result");
-      resultEle.value = JSON.stringify(result, null, 4);
-      resultEle.style.display = "block";
+      for (let i = 0; i < result.ButlerBudget.length; i++) {
+        let div = document.createElement("div");
+        div.innerHTML = `Category: ${result.ButlerBudget[i].Category}, Item: ${result.ButlerBudget[i].Item}, Amount: ${result.ButlerBudget[i].Amount}`;
+        mainContainer.appendChild(div);
+      }
+
+      //   let resultEle = document.getElementById("json-result");
+      //   resultEle.value = JSON.stringify(result, null, 2);
+      //   resultEle.style.display = "block";
     };
   } catch (e) {
     console.error(e);
